@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LivreController!{% endblock %}
+
+{% block body %}
+<h1>Nos livres</h1>
+{#On affiche tous les livres avec une boucle #}
+	<div class="row">
+	{% for livre in livres %}
+		<div class="col-12 col-md-3 col-xl-2">
+		<div class="card">
+		{% if livre.imageName is defined and livre.imageName is not null %}
+  	<img src="{{ asset('images/livres/' ~ livre.imageName) }}" class="card-img-top" alt="">
+		{% else %}
+		<img src="{{ asset('images/livres/book-default.png') }}" class="card-img-top" alt="image par default">
+		{% endif %}
+
+  <div class="card-body">
+		<a href="{{ path('app_livre_show', { slug: livre.slug}) }}" class="text-dark">{{ livre.nom }}</a>
+    	
+  </div>
+</div>
+		
+		</div>
+	{% endfor %}
+	</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base-backend.html.twig' %}
+
+{% block title %}Livre index{% endblock %}
+
+{% block body %}
+    <div class="d-flex flex-wrap justify-content-between align-items-center">
+    <h1>Livre index</h1>
+    <a href="{{ path('app_admin_livre_new') }}" class="btn btn-success"><i class="aligne-middle" data-feather="plus"></i></a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>ImageName</th>
+                <th>Slug</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for livre in livres %}
+            <tr>
+                <td>{{ livre.id }}</td>
+                <td>{{ livre.nom }}</td>
+                <td>{{ livre.description|raw }}</td>
+                <td>{{ livre.imageName }}</td>
+                <td>{{ livre.slug }}</td>
+                <td>{{ livre.updatedAt ? livre.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_admin_livre_show', {'id': livre.id}) }}">show</a>
+                    <a href="{{ path('app_admin_livre_edit', {'id': livre.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
